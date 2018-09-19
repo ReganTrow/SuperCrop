@@ -23,7 +23,11 @@ namespace SuperCrop
         public MainWindow()
         {
             InitializeComponent();
-            //this.SizeToContent = SizeToContent.WidthAndHeight;
+        }
+
+        private void CroppingFolderSelectionBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            CroppingFolderTextBox.Text = FolderPathHandling.ReturnFolderPath("Please select the folder full of images that need to be cropped.");
         }
     }
 }
