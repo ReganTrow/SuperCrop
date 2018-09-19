@@ -23,6 +23,7 @@ namespace SuperCrop
         public MainWindow()
         {
             InitializeComponent();
+            //this.SizeToContent = SizeToContent.WidthAndHeight;
         }
     }
 }
