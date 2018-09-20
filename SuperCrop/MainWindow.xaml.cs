@@ -29,5 +29,10 @@ namespace SuperCrop
         {
             CroppingFolderTextBox.Text = FolderPathHandling.ReturnFolderPath("Please select the folder full of images that need to be cropped.");
         }
+
+        private void OutputFolderSelectionBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OutputFolderTextBox.Text = FolderPathHandling.ReturnFolderPath("Please select the folder that you wish to save the cropped images to.");
+        }
     }
 }
