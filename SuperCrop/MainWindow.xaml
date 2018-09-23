@@ -8,8 +8,7 @@
         Title="Super Crop" 
         Height="900"
         MinHeight="600"
-        Width="1920"
-        MinWidth="1080">
+        WindowState="Maximized">
     <Grid x:Name="ProgramWindowGrid">        
         <TabControl x:Name="ProgramWindowTabControl" 
                     Height="Auto" 
