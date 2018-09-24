@@ -52,7 +52,7 @@
                                  MinWidth="400"
                                  TextWrapping="Wrap" 
                                  VerticalAlignment="Center"  
-                                 VerticalContentAlignment="Center"/>
+                                 VerticalContentAlignment="Center" TextChanged="CroppingFolderTextBox_TextChanged"/>
                         <Button x:Name="CroppingFolderSelectionBrowseButton" 
                                 Content="..." 
                                 Grid.Column="2" 
@@ -69,7 +69,7 @@
                                Grid.Row="1"
                                Height="Auto"
                                Width="Auto"
-                               HorizontalAlignment="Left"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Top"/>
                     <GroupBox x:Name="CropDimensionsSlidersGroupBox" 
                               Header="Crop Dimensions"    

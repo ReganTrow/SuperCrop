@@ -65,6 +65,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FolderCheck.cs" />
+    <Compile Include="FolderDescriptionHandling.cs" />
     <Compile Include="FolderPathHandling.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

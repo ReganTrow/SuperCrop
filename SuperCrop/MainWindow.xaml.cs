@@ -34,5 +34,10 @@ namespace SuperCrop
         {
             OutputFolderTextBox.Text = FolderPathHandling.ReturnFolderPath("Please select the folder that you wish to save the cropped images to.");
         }
+
+        private void CroppingFolderTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FolderDescriptionTextBlock.Text = FolderDescriptionHandling.DescriptionText(CroppingFolderTextBox.Text);
+        }
     }
 }
