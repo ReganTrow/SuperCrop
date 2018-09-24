@@ -40,6 +40,32 @@ namespace SuperCrop
             CropFolder cropFolder = new CropFolder(CroppingFolderTextBox.Text);
             FolderDescriptionTextBlock.Text = cropFolder.FolderDescriptionDialog;
             CropButton.IsEnabled = cropFolder.IsValidCropFolder;
+            if (cropFolder.IsValidCropFolder)
+            {
+                Sliders sliders = new Sliders(cropFolder.AspectRatios[0]);
+                UpdateSliderControlsToSliderObjects(sliders);
+            }
+        }
+
+        private void UpdateSliderControlsToSliderObjects(Sliders sliders)
+        {
+            CropDimensionsOriginXSlider.Value = sliders.OriginX.Value;
+            CropDimensionsOriginYSlider.Value = sliders.OriginY.Value;
+            CropDimensionsDimensionsHeightSlider.Value = sliders.DimensionHeight.Value;
+            CropDimensionsDimensionsWidthSlider.Value = sliders.DimensionWidth.Value;
+            CropDimensionsOriginXSlider.Maximum = sliders.OriginX.Maximum;
+            CropDimensionsOriginYSlider.Maximum = sliders.OriginY.Maximum;
+            CropDimensionsDimensionsHeightSlider.Maximum = sliders.DimensionHeight.Maximum;
+            CropDimensionsDimensionsWidthSlider.Maximum = sliders.DimensionWidth.Maximum;
+            EnableSliders();
+        } 
+
+        private void EnableSliders()
+        {
+            CropDimensionsOriginXSlider.IsEnabled = true;
+            CropDimensionsOriginYSlider.IsEnabled = true;
+            CropDimensionsDimensionsHeightSlider.IsEnabled = true;
+            CropDimensionsDimensionsWidthSlider.IsEnabled = true;
         }
     }
 }

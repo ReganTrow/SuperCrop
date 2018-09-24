@@ -115,6 +115,9 @@
                                                HorizontalAlignment="Center" 
                                                VerticalAlignment="Center"/>
                                         <Slider x:Name="CropDimensionsOriginXSlider"
+                                                IsEnabled="False"
+                                                IsSnapToTickEnabled="True"
+                                                TickFrequency="1"
                                                 Grid.Row="1"
                                                 Height="Auto"
                                                 MinHeight="26"                                                
@@ -123,7 +126,13 @@
                                                 Margin="5,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"/>
-                                        <TextBox x:Name="CropDimensionsOriginXTextBox" 
+                                        <TextBox x:Name="CropDimensionsOriginXTextBox"
+                                                 IsEnabled="{Binding ElementName=CropDimensionsOriginXSlider,
+                                                             Path=IsEnabled,
+                                                             UpdateSourceTrigger=PropertyChanged}"
+                                                 Text="{Binding ElementName=CropDimensionsOriginXSlider,
+                                                        Path=Value,
+                                                        UpdateSourceTrigger=PropertyChanged}"                                                
                                                  Grid.Row="2" 
                                                  Height="Auto" 
                                                  MinHeight="26"
@@ -131,6 +140,7 @@
                                                  MaxWidth="40"
                                                  TextWrapping="Wrap" 
                                                  VerticalAlignment="Center"  
+                                                 HorizontalContentAlignment="Center"
                                                  VerticalContentAlignment="Center"/>
                                         <Label x:Name="CropDimensionsOriginYLabel"
                                                Content="Y" 
@@ -141,6 +151,9 @@
                                                HorizontalAlignment="Center" 
                                                VerticalAlignment="Center"/>
                                         <Slider x:Name="CropDimensionsOriginYSlider"
+                                                IsEnabled="False"
+                                                IsSnapToTickEnabled="True"
+                                                TickFrequency="1"
                                                 Grid.Row="1"
                                                 Grid.Column="1"
                                                 Height="Auto"
@@ -150,7 +163,13 @@
                                                 Margin="5,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"/>
-                                        <TextBox x:Name="CropDimensionsOriginYTextBox" 
+                                        <TextBox x:Name="CropDimensionsOriginYTextBox"
+                                                 IsEnabled="{Binding ElementName=CropDimensionsOriginYSlider,
+                                                             Path=IsEnabled,
+                                                             UpdateSourceTrigger=PropertyChanged}"
+                                                 Text="{Binding ElementName=CropDimensionsOriginYSlider,
+                                                        Path=Value,
+                                                        UpdateSourceTrigger=PropertyChanged}"  
                                                  Grid.Row="2" 
                                                  Grid.Column="1"
                                                  Height="Auto" 
@@ -159,6 +178,7 @@
                                                  MaxWidth="40"
                                                  TextWrapping="Wrap" 
                                                  VerticalAlignment="Center"  
+                                                 HorizontalContentAlignment="Center"
                                                  VerticalContentAlignment="Center"/>
                                     </Grid>
                                 </GroupBox >
@@ -180,58 +200,78 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Label x:Name="CropDimensionsDimensionsWidthLabel"
-                                                       Content="Width" 
-                                                       Height="Auto" 
-                                                       MinHeight="26"
-                                                       Width="Auto" 
-                                                       HorizontalAlignment="Center" 
-                                                       VerticalAlignment="Center"/>
+                                               Content="Width" 
+                                               Height="Auto" 
+                                               MinHeight="26"
+                                               Width="Auto" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
                                         <Slider x:Name="CropDimensionsDimensionsWidthSlider"
-                                                        Grid.Row="1"
-                                                        Height="Auto"
-                                                        MinHeight="26"                                                
-                                                        Width="Auto"
-                                                        MinWidth="200"
-                                                        Margin="5,0"
-                                                        HorizontalAlignment="Left"
-                                                        VerticalAlignment="Top"/>
+                                                IsEnabled="False"
+                                                IsSnapToTickEnabled="True"
+                                                TickFrequency="1"
+                                                Grid.Row="1"
+                                                Height="Auto"
+                                                MinHeight="26"                                                
+                                                Width="Auto"
+                                                MinWidth="200"
+                                                Margin="5,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"/>
                                         <TextBox x:Name="CropDimensionsDimensionsWidthTextBox" 
-                                                         Grid.Row="2" 
-                                                         Height="Auto" 
-                                                         MinHeight="26"
-                                                         Width="Auto"  
-                                                         MaxWidth="40"
-                                                         TextWrapping="Wrap" 
-                                                         VerticalAlignment="Center"  
-                                                         VerticalContentAlignment="Center"/>
+                                                 IsEnabled="{Binding ElementName=CropDimensionsDimensionsWidthSlider,
+                                                             Path=IsEnabled,
+                                                             UpdateSourceTrigger=PropertyChanged}"
+                                                 Text="{Binding ElementName=CropDimensionsDimensionsWidthSlider,
+                                                        Path=Value,
+                                                        UpdateSourceTrigger=PropertyChanged}"  
+                                                 Grid.Row="2" 
+                                                 Height="Auto" 
+                                                 MinHeight="26"
+                                                 Width="Auto"  
+                                                 MaxWidth="40"
+                                                 TextWrapping="Wrap" 
+                                                 VerticalAlignment="Center"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"/>
                                         <Label x:Name="CropDimensionsDimensionsHeightLabel"
-                                                       Content="Height" 
-                                                       Grid.Column="1"
-                                                       Height="Auto" 
-                                                       MinHeight="26"
-                                                       Width="Auto" 
-                                                       HorizontalAlignment="Center" 
-                                                       VerticalAlignment="Center"/>
+                                               Content="Height" 
+                                               Grid.Column="1"
+                                               Height="Auto" 
+                                               MinHeight="26"
+                                               Width="Auto" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
                                         <Slider x:Name="CropDimensionsDimensionsHeightSlider"
-                                                        Grid.Row="1"
-                                                        Grid.Column="1"
-                                                        Height="Auto"
-                                                        MinHeight="26"                                                
-                                                        Width="Auto"
-                                                        MinWidth="200"
-                                                        Margin="5,0"
-                                                        HorizontalAlignment="Left"
-                                                        VerticalAlignment="Top"/>
-                                        <TextBox x:Name="CropDimensionsDimensionsHeightTextBox" 
-                                                         Grid.Row="2" 
-                                                         Grid.Column="1"
-                                                         Height="Auto" 
-                                                         MinHeight="26"
-                                                         Width="Auto"  
-                                                         MaxWidth="40"
-                                                         TextWrapping="Wrap" 
-                                                         VerticalAlignment="Center"  
-                                                         VerticalContentAlignment="Center"/>
+                                                IsEnabled="False"
+                                                IsSnapToTickEnabled="True"
+                                                TickFrequency="1"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Height="Auto"
+                                                MinHeight="26"                                                
+                                                Width="Auto"
+                                                MinWidth="200"
+                                                Margin="5,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"/>
+                                        <TextBox x:Name="CropDimensionsDimensionsHeightTextBox"
+                                                 IsEnabled="{Binding ElementName=CropDimensionsDimensionsWidthSlider,
+                                                             Path=IsEnabled,
+                                                             UpdateSourceTrigger=PropertyChanged}"
+                                                 Text="{Binding ElementName=CropDimensionsDimensionsHeightSlider,
+                                                        Path=Value,
+                                                        UpdateSourceTrigger=PropertyChanged}" 
+                                                 Grid.Row="2" 
+                                                 Grid.Column="1"
+                                                 Height="Auto" 
+                                                 MinHeight="26"
+                                                 Width="Auto"  
+                                                 MaxWidth="40"
+                                                 TextWrapping="Wrap" 
+                                                 VerticalAlignment="Center"  
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"/>
                                     </Grid>
                                 </GroupBox>
                             </Grid>
