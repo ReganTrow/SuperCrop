@@ -37,7 +37,9 @@ namespace SuperCrop
 
         private void CroppingFolderTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FolderDescriptionTextBlock.Text = FolderDescriptionHandling.DescriptionText(CroppingFolderTextBox.Text);
+            Tuple <string,Boolean> descriptionText = FolderDescriptionHandling.DescriptionText(CroppingFolderTextBox.Text);
+            FolderDescriptionTextBlock.Text = descriptionText.Item1;
+            CropButton.IsEnabled = descriptionText.Item2;
         }
     }
 }

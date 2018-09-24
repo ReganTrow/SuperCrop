@@ -92,7 +92,11 @@ namespace SuperCrop
                             BitmapCreateOptions.DelayCreation,
                             BitmapCacheOption.None);
                             BitmapFrame imageFrame = imageDecoder.Frames[0];
-                        Tuple<int, int> imageDimensions = Tuple.Create(imageFrame.PixelHeight, imageFrame.PixelWidth);
+                        // The below lowers the aspect ratio using the greatest common factor of the image hieght and width.
+                        int greatestCommonFactor = GreatestCommonFactor(imageFrame.PixelHeight, imageFrame.PixelWidth);
+                        Tuple<int, int> imageDimensions = Tuple.Create(
+                            imageFrame.PixelHeight/greatestCommonFactor,
+                            imageFrame.PixelWidth/greatestCommonFactor);
                         if (aspectRatioList.Contains(imageDimensions)==false)
                         {
                             aspectRatioList.Add(imageDimensions);
@@ -101,6 +105,23 @@ namespace SuperCrop
                 }
                 return aspectRatioList;
             }
+        }
+
+        // Returns the greatest common factor of the two inputs
+        private static int GreatestCommonFactor(int a, int b)
+        {
+            while (a!=0 && b!=0)
+            {
+                if (a>b)
+                    a %= b;
+                else
+                    b %= a;
+            }
+
+            if (a == 0)
+                return b;
+            else
+                return a;
         }
 
 
