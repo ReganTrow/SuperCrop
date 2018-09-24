@@ -10,7 +10,7 @@ namespace SuperCrop
 {
     class CropFolder
     {
-        public List<Tuple<int,int>> AspectRatios { get; set; }
+        public List<AspectRatio> AspectRatios { get; set; }
         public string[] Filenames { get; set; }
         public int FileCount { get; set; }
         public int JPGCount { get; set; }
@@ -22,7 +22,7 @@ namespace SuperCrop
         {
             if (Directory.Exists(path) == false)
             {
-                AspectRatios = new List<Tuple<int, int>>();
+                AspectRatios = new List<AspectRatio>();
                 Path = path;
                 FileCount = 0;
                 JPGCount = 0;
@@ -56,7 +56,7 @@ namespace SuperCrop
         // Initialises the AspectRatios property - must only be called if the path is known to exist.
         private void InitialiseAspectRatios()
         {
-            AspectRatios = new List<Tuple<int, int>>();
+            AspectRatios = new List<AspectRatio>();
             foreach (string filename in Filenames)
             {
                 if (filename.EndsWith(".jpg"))
@@ -68,12 +68,12 @@ namespace SuperCrop
                     BitmapFrame imageFrame = imageDecoder.Frames[0];
                     // The below lowers the aspect ratio using the greatest common factor of the image hieght and width.
                     int greatestCommonFactor = GreatestCommonFactor(imageFrame.PixelHeight, imageFrame.PixelWidth);
-                    Tuple<int, int> imageDimensions = Tuple.Create(
+                    AspectRatio aspectRatio = new AspectRatio(
                         imageFrame.PixelHeight / greatestCommonFactor,
                         imageFrame.PixelWidth / greatestCommonFactor);
-                    if (AspectRatios.Contains(imageDimensions) == false)
+                    if (AspectRatios.Contains(aspectRatio) == false)
                     {
-                        AspectRatios.Add(imageDimensions);
+                        AspectRatios.Add(aspectRatio);
                     }
                 }
             }
@@ -102,7 +102,7 @@ namespace SuperCrop
                     FolderDescriptionDialog += "The following aspect ratios (H X W) are present in images in the specified cropping folder:\n";
                     foreach (var aspectRatio in AspectRatios)
                     {
-                        FolderDescriptionDialog += String.Format("    - {0} x {1}\n", aspectRatio.Item1, aspectRatio.Item2);
+                        FolderDescriptionDialog += String.Format("    - {0} x {1}\n", aspectRatio.Height, aspectRatio.Width);
                     }
                     if (AspectRatios.Count > 1)
                     {

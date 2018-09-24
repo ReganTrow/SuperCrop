@@ -65,6 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AspectRatio.cs" />
     <Compile Include="CropFolder.cs" />
     <Compile Include="FolderPathHandling.cs" />
     <Compile Include="MainWindow.xaml.cs">
