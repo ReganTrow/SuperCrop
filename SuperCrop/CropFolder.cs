@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,18 @@ namespace SuperCrop
         public int FileCount { get; set; }
         public int JPGCount { get; set; }
         public string FolderDescriptionDialog { get; set; }
-        public Boolean IsValidCropFolder { get; set; }
+        public bool IsValidCropFolder { get; set; }
         public string Path { get; set; }
+
+        private static string NO_CROPPING_FOLDER_MESSAGE = "Please specify a cropping folder that exists.\n";
+        private static string FILE_COUNT_MESSAGE = "There are {0} files in the specified folder, {1} of which are .jpg files.\n";
+        private static string NO_JPG_MESSAGE = "As there are no .jpg files in the specified cropping folder, no cropping operations will be possible.\n";
+        private static string ASPECT_RATIO_INTRODUCTION_MESSAGE = "The following aspect ratios (W X H) are present in images in the specified cropping folder:\n";
+        private static string ASPECT_RATIO_LISTING_MESSAGE = "    - {0} x {1}\n";
+        private static string TOO_MANY_ASPECT_RATIOS_MESSAGE = "Sorry, Super Crop only allows mass cropping on folders in which " +
+                            "all the images have the same aspect ratios.\n";
+
+        private static string JPG_FILE_EXTENSION = ".jpg";
 
         public CropFolder(string path)
         {
@@ -41,13 +52,32 @@ namespace SuperCrop
             }
         }
 
+        // Constructor for initialising from FolderDescriptionTextBlock
+        public CropFolder(string path, string folderDescriptionDialog)
+        {
+            Path = path;
+            FolderDescriptionDialog = folderDescriptionDialog;
+            if(Directory.Exists(Path)==false)
+            {
+                AspectRatios = new List<AspectRatio>();
+                FileCount = 0;
+                JPGCount = 0;
+                IsValidCropFolder = false;
+            }
+            else
+            {
+                string[] folderDescriptionLines = FolderDescriptionDialog.Split(new[] { '\r', '\n' });
+                
+            }
+        }
+
         // Initialises the JPGCount property - must only be called if the path is known to exist.
         private void InitialiseJPGCount()
         {
             int jpgCounter = 0;
             foreach (string filename in Filenames)
             {
-                if (filename.EndsWith(".jpg"))
+                if (filename.EndsWith(JPG_FILE_EXTENSION))
                     jpgCounter++;
             }
             JPGCount = jpgCounter;
@@ -59,7 +89,7 @@ namespace SuperCrop
             AspectRatios = new List<AspectRatio>();
             foreach (string filename in Filenames)
             {
-                if (filename.EndsWith(".jpg"))
+                if (filename.EndsWith(JPG_FILE_EXTENSION))
                 {
                     BitmapDecoder imageDecoder = BitmapDecoder.Create(
                         new Uri(filename, UriKind.Absolute),
@@ -71,7 +101,7 @@ namespace SuperCrop
                     AspectRatio aspectRatio = new AspectRatio(
                         imageFrame.PixelHeight / greatestCommonFactor,
                         imageFrame.PixelWidth / greatestCommonFactor);
-                    if (AspectRatios.Contains(aspectRatio) == false)
+                    if (AspectRatios.Contains(aspectRatio) == false) 
                     {
                         AspectRatios.Add(aspectRatio);
                     }
@@ -86,28 +116,26 @@ namespace SuperCrop
 
         private void InitialiseFolderDescriptionDialog()
         {
+            FolderDescriptionDialog = "\n";
             if (Directory.Exists(Path) == false)
-                FolderDescriptionDialog = "\nPlease specify a cropping folder that exists.\n";
+                FolderDescriptionDialog += NO_CROPPING_FOLDER_MESSAGE;
             else
             {
-                FolderDescriptionDialog = String.Format("There are {0} files in the specified folder, {1} of which are .jpg files.\n",
-                    FileCount,
-                    JPGCount);
+                FolderDescriptionDialog += String.Format(FILE_COUNT_MESSAGE, FileCount, JPGCount);
                 if (JPGCount == 0)
                 {
-                    FolderDescriptionDialog+="As there are no .jpg files in the specified cropping folder, no cropping operations will be possible.\n";
+                    FolderDescriptionDialog += NO_JPG_MESSAGE;
                 }
                 else
                 {
-                    FolderDescriptionDialog += "The following aspect ratios (H X W) are present in images in the specified cropping folder:\n";
+                    FolderDescriptionDialog += ASPECT_RATIO_INTRODUCTION_MESSAGE;
                     foreach (var aspectRatio in AspectRatios)
                     {
-                        FolderDescriptionDialog += String.Format("    - {0} x {1}\n", aspectRatio.Height, aspectRatio.Width);
+                        FolderDescriptionDialog += String.Format(ASPECT_RATIO_LISTING_MESSAGE, aspectRatio.Width, aspectRatio.Height);
                     }
                     if (AspectRatios.Count > 1)
                     {
-                        FolderDescriptionDialog += "Sorry, Super Crop only allows mass cropping on folders in which " +
-                            "all the images have the same aspect ratios.\n";
+                        FolderDescriptionDialog += TOO_MANY_ASPECT_RATIOS_MESSAGE;
                     }
                 }
             }

@@ -67,5 +67,25 @@ namespace SuperCrop
             CropDimensionsDimensionsHeightSlider.IsEnabled = true;
             CropDimensionsDimensionsWidthSlider.IsEnabled = true;
         }
+
+        private void CropDimensionsOriginXSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            CropFolder cropFolder = new CropFolder(CroppingFolderTextBox.Text, FolderDescriptionTextBlock.Text);
+        }
+
+        private void CropDimensionsOriginYSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void CropDimensionsDimensionHeightSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void CropDimensionsDimensionWidthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

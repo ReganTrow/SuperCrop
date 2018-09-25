@@ -125,7 +125,7 @@
                                                 MinWidth="200"
                                                 Margin="5,0"
                                                 HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"/>
+                                                VerticalAlignment="Top" ValueChanged="CropDimensionsOriginXSlider_ValueChanged"/>
                                         <TextBox x:Name="CropDimensionsOriginXTextBox"
                                                  IsEnabled="{Binding ElementName=CropDimensionsOriginXSlider,
                                                              Path=IsEnabled,
